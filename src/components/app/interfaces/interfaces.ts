@@ -9,3 +9,8 @@ export  interface Productos {
 export interface ProductosInfoProps {
     datosProductos: Productos[];
 }
+
+export interface CarritoProps {
+    carritoDatos: Productos[];
+    eliminar: (id: number) => void;
+}
