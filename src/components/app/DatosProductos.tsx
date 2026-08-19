@@ -17,14 +17,14 @@ export default function ProductosInfo({ datosProductos, handleCar }: ProductosIn
 
     const [cardActiva, setCardActiva] = useState<number[]>([]);
 
-    const cambiarColor = (id: number) => {
+    /*  const cambiarColor = (id: number) => {
         console.log(cardActiva);
         setCardActiva(prev =>
             prev.includes(id)
                 ? prev.filter(cardId => cardId !== id) // quitar
                 : [...prev, id] // agregar
         );
-    }
+    } */
 
     return (
         <>
