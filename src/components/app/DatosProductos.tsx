@@ -17,14 +17,14 @@ export default function ProductosInfo({ datosProductos, handleCar }: ProductosIn
 
     const [cardActiva, setCardActiva] = useState<number[]>([]);
 
-    /*  const cambiarColor = (id: number) => {
+    const cambiarColor = (id: number) => {
         console.log(cardActiva);
         setCardActiva(prev =>
             prev.includes(id)
                 ? prev.filter(cardId => cardId !== id) // quitar
                 : [...prev, id] // agregar
         );
-    } */
+    }
 
     return (
         <>
@@ -54,6 +54,7 @@ export default function ProductosInfo({ datosProductos, handleCar }: ProductosIn
                                 </CardContent>
                                 <CardFooter>
                                     {/* <Button onClick={() => cambiarColor(p.id)} >Accion</Button> */}
+                                    <div onClick={() => cambiarColor(p.id)} ></div>
                                     <Button onClick={() => handleCar(p)} className='w-full'>Agregar al carrito</Button>
                                 </CardFooter>
                             </Card>
