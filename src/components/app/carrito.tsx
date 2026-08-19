@@ -1,5 +1,5 @@
 
-import type { CarritoProps } from "./interfaces/interfaces";
+import type { CarritoProps } from "../../type";
 
 export default function Carrito ({carritoDatos,eliminar}:CarritoProps){
     
