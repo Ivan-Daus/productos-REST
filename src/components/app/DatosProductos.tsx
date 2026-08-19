@@ -25,10 +25,8 @@ export default function ProductosInfo({ datosProductos, handleCar }: ProductosIn
                 : [...prev, id] // agregar
         );
     }
-
     return (
         <>
-
             <div className='grid grid-cols-4 md:grid-cols-6 xl:grid-cols-12 bg-zinc-300 p-3 gap-3'>
                 {
                     datosProductos.map((p) =>
@@ -61,10 +59,7 @@ export default function ProductosInfo({ datosProductos, handleCar }: ProductosIn
                         </div>
                     )
                 }
-
             </div>
         </>
-
     )
-
 }
