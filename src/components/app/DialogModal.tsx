@@ -13,6 +13,7 @@ interface DialogModalProps {
     titleModal:string;
     children: React.ReactNode;
 }
+
 export function DialogModal({nameButton,titleModal,children}:DialogModalProps) {
     return (
         <>
@@ -20,14 +21,13 @@ export function DialogModal({nameButton,titleModal,children}:DialogModalProps) {
                 <DialogTrigger asChild>
                     <Button variant="outline">{nameButton}</Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-2xl">
                     <DialogHeader>
                         <DialogTitle>{titleModal}</DialogTitle>
-                        <DialogDescription>
+                        <DialogDescription asChild>
                             {children}
                         </DialogDescription>
                     </DialogHeader>
-                    {/* Tu formulario o contenido aquí */}
                 </DialogContent>
             </Dialog>
         </>

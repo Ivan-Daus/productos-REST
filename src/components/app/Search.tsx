@@ -5,7 +5,7 @@ interface InputFiltroProps {
     onFiltroChange: (valor: string) => void;
 }
 
-export default function FiltroTexto({ onFiltroChange }: InputFiltroProps){
+export default function Search({ onFiltroChange }: InputFiltroProps){
     
     return (
         <>

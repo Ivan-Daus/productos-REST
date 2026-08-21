@@ -1,27 +1,24 @@
 import './app.css'
 import { useState, useEffect } from 'react'
 
-
-import FiltroTexto from './components/app/buscador';
-import ProductosInfo from './components/app/DatosProductos';
-import type { Productos } from './type';
+import Search from './components/app/Search';
+import ProductInfo from './components/app/ProductInfo';
+import type { ProductApi, ProductCar } from './type';
 import { DataApi } from './service/DataApi';
 import { DataApiNormalice } from './normalice/DataApi-Normalice';
-import Carrito from './components/app/carrito';
+import Carrt from './components/app/carrt';
 import { DialogModal } from './components/app/DialogModal';
 
 function App() {
-  const [datos, setDatos] = useState<Productos[]>([])
-  const [filtroNombre, setFiltroNombre] = useState("");
-
-  const [carrito, setCarrito] = useState<Productos[]>([]);
+  const [data, setData] = useState<ProductApi[]>([])
+  const [filterName, setFilterName] = useState("");
+  const [carrtProdcut, setCarrtProdcut] = useState<ProductCar[]>([]);
 
   useEffect(() => {
-
     const apiData = async () => {
       try {
         const dataApiNormalice = await DataApiNormalice(await DataApi())
-        setDatos(dataApiNormalice);
+        setData(dataApiNormalice);
       } catch (error) {
         console.log("Fallo de la petición: " + error);
       }
@@ -29,36 +26,38 @@ function App() {
     apiData();
   }, []);
 
-  let datosFiltrados =
-    datos.filter(productos => productos.title.toLowerCase().includes(filtroNombre.toLowerCase()));
-
-  const handleCar = (p: Productos) => {
-    console.log(p);
-    setCarrito(prev => [...prev, p]);
-    console.log(carrito);
+  let dataFiler = data.filter(p => p.title.toLowerCase().includes(filterName.toLowerCase()));
+  
+  const handleAddCar = (p: ProductApi) => {
+    const newCar = {
+      ...p,
+      idCar:crypto.randomUUID()
+    }
+    setCarrtProdcut(prev=>[...prev, newCar]);
   }
-
-  const handlCarDelete = (id: number) => {
-    setCarrito(prev => prev.filter(carId => carId.id !== id))
+  
+  const handlCarDelete = (id: string) => {
+    setCarrtProdcut(prev => prev.filter(carId => carId.idCar !== id))
   }
+  useEffect(()=>{
+    if(!carrtProdcut) console.log(carrtProdcut);
+  },[carrtProdcut])
+  
   return (
     <>
       <div className='bg-gray-100'>
-        <div className='grid grid-cols-20'>
-          <div className='col-span-19'>
-            <FiltroTexto onFiltroChange={setFiltroNombre} />
+        <div className='grid grid-cols-5 xl:grid-cols-20'>
+          <div className='col-span-5 xl:col-span-18'>
+            <Search onFiltroChange={setFilterName} />
           </div>
-          <div className='col-span-1 flex justify-center  items-center'>
-            <DialogModal nameButton="Ver carrito" titleModal="Carrito">
-              <Carrito carritoDatos={carrito} eliminar={handlCarDelete}></Carrito>
-              
+          <div className='col-span-5 xl:col-span-2 mb-3 xl:mb-0 flex justify-center items-center'>
+            <DialogModal nameButton={`Ver carrito ${carrtProdcut.length}`} titleModal="Carrito">
+              <Carrt carrtData={carrtProdcut} deleteCarrt={handlCarDelete} />
             </DialogModal> 
           </div>
         </div>
-
-        <ProductosInfo datosProductos={datosFiltrados} handleCar={handleCar} />
+        <ProductInfo dataProduct={dataFiler} handleAddCar={handleAddCar} />
       </div>
-
     </>
   )
 }

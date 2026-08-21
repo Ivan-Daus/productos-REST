@@ -2,7 +2,7 @@ interface Rating {
     rate: number;
     count: number;
 }
-export interface DataApiTypeProps {
+export interface ProductApi {
     id: number;
     title: string
     description: string;
@@ -11,21 +11,14 @@ export interface DataApiTypeProps {
     price: number;
     rating: Rating;
 }
-
-export  interface Productos {
-    id: number;
-    title: string;
-    image: string;
-    description: string;
-    price: number;
+export  interface ProductCar extends ProductApi {
+    idCar:string ;
 }
-
-export interface ProductosInfoProps {
-    datosProductos: Productos[];
-    handleCar:(p: Productos) => void;
+export interface ProductInfoProps {
+    dataProduct: ProductApi[];
+    handleAddCar:(p: ProductApi) => void;
 }
-
-export interface CarritoProps {
-    carritoDatos: Productos[];
-    eliminar: (id: number) => void;
+export interface CarrtProps {
+    carrtData: ProductCar[];
+    deleteCarrt: (id: string) => void;
 }
